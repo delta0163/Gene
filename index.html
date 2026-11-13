@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI картинки</title>
+<style>
+  body{font-family:system-ui,sans-serif;max-width:560px;margin:0 auto;padding:16px;background:#111;color:#eee}
+  textarea{width:100%;height:110px;padding:10px;border-radius:10px;border:1px solid #444;background:#1c1c1c;color:#eee;font-size:16px;box-sizing:border-box}
+  button{width:100%;margin-top:10px;padding:14px;border:0;border-radius:10px;background:#6c5ce7;color:#fff;font-size:17px}
+  button:disabled{opacity:.5}
+  img{width:100%;margin-top:14px;border-radius:10px}
+  #msg{margin-top:12px;color:#ff8a80}
+</style>
+</head>
+<body>
+<h2>Генератор картинок</h2>
+<textarea id="p" placeholder="Опиши, что нарисовать..."></textarea>
+<button id="b" onclick="go()">Сгенерировать</button>
+<div id="msg"></div>
+<div id="out"></div>
+
+<script>
+const MINOR = ["ребен","ребён","дети","детей","детск","малолет","школьниц","школьник","подрост","несовершеннолет","малыш","девочк","мальчик","child","kid","minor","underage","teen","toddler","preteen","schoolgirl","schoolboy","young girl","young boy","baby"];
+const SEXUAL = ["порн","секс","голы","гола","обнажен","обнажён","эрот","нюд","интим","сиськ","грудь","nude","naked","nsfw","porn","sex","erotic","explicit","topless","lewd","hentai","bikini","lingerie","бикини","белье","бельё"];
+const ALWAYS = ["лоли","шота","loli","shota","lolita","csam","tween","youthful","petite","school","школ","юн","молоденьк","young","student","студент"];
+
+function blocked(t){
+  t = " " + t.toLowerCase().replace(/\s+/g," ") + " ";
+  return ALWAYS.some(w => t.includes(w)) || MINOR.some(w => t.includes(w));
+}
+
+function go(){
+  const b = document.getElementById("b");
+  const m = document.getElementById("msg");
